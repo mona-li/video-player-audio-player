@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Audio + Video</title>
+  <style>
+    body{
+        margin: 5px;
+        padding:0;
+    }
+    .play {
+        width: 0;
+	height: 0;
+	float: left;
+	border-top: 7px solid transparent;
+	border-left: 12px solid black;
+	border-bottom: 7px solid transparent;
+    }
+    .pause{
+        width: 12px;
+        height: 14px;
+        float: left;
+        background-color: black;
+        display: table-cell;
+        vertical-align: middle;
+        background-image: linear-gradient(to right, black 38%, orange 38%, orange 58%, black 58%)
+    }
+    .stop{
+        width: 12px;
+        height: 12px;
+        float: left;
+        background-color: black;
+    }
+    .minus, .plus1{
+        width: 12px;
+        height: 4px;
+        background-color: black;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .plus2{
+        width: 4px;
+        height: 12px;
+        position: absolute;
+        top: 11px;
+        left: 43px;
+        background-color: black;   
+    }
+    .btn{
+        width: 75px;
+        height: 30px;
+        margin: 1px;
+        padding: 3px 5px;
+        position: relative;
+        background-color: orange;
+        box-shadow: 3px 3px 3px 5px rgba(0,0,0,.8);
+        border-radius: 10%;
+        float: left;
+        cursor: default;
+    }
+    .btn:active{
+        box-shadow: 3px 3px 3px 2px rgba(0,0,0,.8);
+    }
+    .inButton{
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    .napis {
+        color: black;
+        font-family: 'roboto', sans-serif;
+        font-weight: 700;
+        text-decoration: none;
+        display: block;
+        float: left;
+        vertical-align: middle;
+        padding: 4px;
+    }
+    .max {
+       width: 115px;   
+    }
+    .small{
+        width: 50px;
+    }
+    #progressBar {
+       clear: both;
+       margin-bottom: 4px;
+       padding: 0px;
+       border: 2px solid black;
+       width: 471px;
+       height: 20px;
+    }
+    #progress {
+       background-color: mediumorchid;
+       height: 20px;
+       display: inline-block;
+    }
+    .time{
+       width: 78px;
+       height: 30px;
+       margin: 1px;
+       float: left;
+       background-color: orange;
+       box-shadow: 3px 3px 3px 5px rgba(0,0,0,.8);
+       border-radius: 10%;
+       text-align: center;
+       display: table;
+    }
+    #time1, #time2{
+       color: black;
+       font-family: 'roboto', sans-serif;
+       font-weight: 700;
+       font-size: 13px;
+       display: table-cell;
+       vertical-align: middle;
+    }
+    #main_video{
+       margin-top: 30px;
+       padding: 0px;
+    }
+    .videoContainer{
+       clear: both;
+     }
+    </style>
+</head>
+<body>
+  <audio id="horse_audio" controls>
+  <source src="http://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+  </audio>
+    <div>
+  
+        <div onclick="document.getElementById('horse_audio').play()"  class="btn">
+            <div class="inButton">
+                <span class="napis">play</span>
+                <div class="play"></div>
+            </div>
+        </div>
+        <div onclick="document.getElementById('horse_audio').pause()" class="btn">
+            <div class="inButton">
+                <span class="napis">pause</span>
+                <div class="pause"></div>
+            </div>
+        </div>
+        <div onclick="document.getElementById('horse_audio').volume+=0.1" class="btn small">
+            <div class="inButton">
+                <span class="napis">vol</span>
+                <div class="plus1"></div>
+                <div class="plus2"></div>
+            </div>
+        </div>
+        <div onclick="document.getElementById('horse_audio').volume-=0.1" class="btn small">
+            <div class="inButton">
+                <span class="napis">vol</span>
+                <div class="minus"></div>
+            </div>
+        </div>
+    </div>
+    <div class="videoContainer">
+      <video id="main_video" width="475" poster="niedzwiedz.jpg">
+       <source src="http://www.w3schools.com/html/movie.mp4" type="video/mp4"> 
+      </video>
+    </div>
+    <div id="progressBar">
+        <span id="progress"></span>
+    </div>
+    <div>
+        <div id="play1" class="btn">
+            <div class="inButton">
+                <span class="napis">play</span>
+                <div class="play"></div>
+            </div>
+        </div>
+        <div id="pause1" class="btn">
+            <div class="inButton">
+                <span class="napis">pause</span>
+                <div class="pause"></div>
+            </div>
+        </div>
+        <div id="stop1" class="btn">
+            <div class="inButton">
+                <span class="napis">stop</span>
+                <div class="stop"></div>
+            </div>
+        </div>
+        <div id="volPlus" class="btn small">
+            <div class="inButton">
+                <span class="napis">vol</span>
+                <div class="plus1"></div>
+                <div class="plus2"></div>
+            </div>
+        </div>
+        <div id="volMinus" class="btn small">
+            <div class="inButton">
+                <span class="napis">vol</span>
+                <div class="minus"></div>
+             </div>
+        </div>
+        <div class="time btn">
+            <span id="time1">0:00/0:12</span>
+        </div>
+    </div>
+       
+  <script>
+    document.getElementById("play1").addEventListener("click", function(){
+        var v = document.getElementById("main_video");
+        v.play();
+        });
+    document.getElementById("pause1").addEventListener("click", function(){
+        var v = document.getElementById("main_video");
+        v.pause();
+        });
+    document.getElementById("stop1").addEventListener("click", function(){
+        var v = document.getElementById("main_video");
+        v.pause(); v.currentTime = 0;
+        });
+    document.getElementById("volPlus").addEventListener("click", function(){
+        var v = document.getElementById("main_video");
+        v.volume+=0.1;
+        });
+    document.getElementById("volMinus").addEventListener("click", function(){
+        var v = document.getElementById("main_video");
+        v.volume-=0.1;
+        });
+        
+    var toEnd=0;
+    var video = document.getElementById("main_video");
+    video.addEventListener("timeupdate", calculateProgress, false);
+    video.addEventListener("timeupdate", function(){
+    var v = document.getElementById("main_video"); 
+    var showtime1;
+    if(toEnd===0){
+        if (v.currentTime<10)
+            showtime1="0:0"+Math.floor(v.currentTime);
+        else {showtime1="0:"+Math.floor(v.currentTime);}
+        document.getElementById("time1").innerHTML = showtime1+"/0:"+Math.floor(v.duration);
+        }
+    else{
+        var timeToEnd=v.duration-v.currentTime;
+        if (timeToEnd<10)
+            showtime1="0:0"+Math.floor(timeToEnd);
+        else {showtime1="0:"+Math.floor(timeToEnd);}
+        document.getElementById("time1").innerHTML = showtime1+"/0:"+Math.floor(v.duration);
+        }; 
+    }); 
+     
+    document.getElementById("time1").addEventListener("click", function(){
+        if (toEnd===0)
+        toEnd=1;
+        else toEnd=0;
+    });
+     
+    function calculateProgress() {
+       var mainVideo = document.getElementById("main_video");
+       var progress = document.getElementById("progress");
+       var progressValue = 0;
+       if (mainVideo.currentTime > 0) {
+          progressValue = Math.floor((100 / mainVideo.duration) * mainVideo.currentTime);
+       }
+       progress.style.width = progressValue + "%";
+    };
+
+    document.getElementById("progressBar").addEventListener("click", function(){ 
+        var x = event.clientX-7; // 2px(progressBar border) + 5px(body margin)
+        var mainVideo = document.getElementById("main_video");
+        var timeWanted = (mainVideo.duration*x)/471; // 471 - progressBar width
+        mainVideo.currentTime = timeWanted;
+    });
+  </script>
+</body>
+</html>
